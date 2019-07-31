@@ -1,0 +1,26 @@
+{
+  "name": "rue-demo",
+  "version": "1.0.0",
+  "description": "Demo as rue consumer",
+  "main": "demo.ts",
+  "author": "yetone",
+  "license": "MIT",
+  "scripts": {
+    "build": "yarn run add-self && webpack --mode production",
+    "add-self:js": "touch node_modules/rue.js && echo \"module.exports = require('../..');\" > node_modules/rue.js",
+    "add-self:ts": "touch node_modules/rue.d.ts && echo \"import myLib from '../../';export = myLib;\" > node_modules/rue.d.ts",
+    "remove-self:js": "rm node_modules/rue.js",
+    "remove-self:ts": "rm node_modules/rue.d.ts",
+    "add-self": "yarn run add-self:js && yarn run add-self:ts",
+    "remove-self": "yarn run remove-self:js && yarn run remove-self:ts"
+  },
+  "devDependencies": {
+    "ts-jest": "^23.10.4",
+    "ts-loader": "^5.2.2",
+    "ts-node": "^7.0.1",
+    "tslint": "^5.10.0",
+    "typescript": "^2.9.2",
+    "webpack": "^4.12.0",
+    "webpack-cli": "^3.0.8"
+  }
+}

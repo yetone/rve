@@ -1,0 +1,40 @@
+{
+  "name": "rue",
+  "version": "0.0.1",
+  "description": "React mixed Vue",
+  "main": "./dist/rue.min.js",
+  "types": "./dist/rue.d.ts",
+  "scripts": {
+    "dev": "yarn run tslint && webpack --mode development",
+    "dev:watch": "nodemon --exec 'yarn run dev || exit 1'",
+    "tslint": "tslint --project .",
+    "build": "yarn run tslint && webpack --mode production",
+    "test": "yarn run clean && jest && yarn run demo:test && yarn run clean",
+    "test:coverage": "yarn run clean && jest --coverage && yarn run demo:test && yarn run clean",
+    "clean": "rm -rf dist",
+    "demo": "yarn run build && cd demo && yarn run build && open ./index.html"
+  },
+  "author": "yetone <yetoneful@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^23.3.7",
+    "@types/node": "^10.12.18",
+    "@types/source-map": "0.5.2",
+    "@types/webpack": "^4.4.21",
+    "jest": "^23.6.0",
+    "nodemon": "^1.17.5",
+    "ts-jest": "^23.10.4",
+    "ts-loader": "^5.2.2",
+    "ts-node": "^7.0.1",
+    "tslint": "^5.10.0",
+    "typescript": "^2.9.2",
+    "webpack": "^4.12.0",
+    "webpack-cli": "^3.0.8"
+  },
+  "dependencies": {
+    "@types/react": "^16.8.23",
+    "@types/react-dom": "^16.8.5",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  }
+}
