@@ -7,6 +7,16 @@ function App() {
     user: {
       name: 'yetone',
     },
+    arr: [
+      {
+        name: 'a',
+        age: 0,
+      },
+      {
+        name: 'b',
+        age: 1,
+      },
+    ],
     a: {
       b: {
         c: {

@@ -30,12 +30,21 @@ function useState<T extends IStringMap<any>>(obj: T): {[key in keyof T]: any} {
   return doUseState(state, dispatch, obj, [])
 }
 
+function isComplexObj(v: any): boolean {
+  return ['[object Object]', '[object Array]'].includes(Object.prototype.toString.call(v))
+}
+
+function isComplexType(v: any): boolean {
+  return ['[object Object]', '[object Array]'].includes(Object.prototype.toString.call(v))
+}
+
 function doUseState<T extends IStringMap<any>, U extends IStringMap<any>>(
   state: U, dispatch: Dispatch<IAction>, obj: T, path: string[]): {[key in keyof T]: any} {
   const descriptors: PropertyDescriptorMap = Object.keys(obj).reduce((p, c) => {
     const origV = obj[c]
+    const type = Object.prototype.toString.call(origV)
 
-    if (Object.prototype.toString.call(origV) === '[object Object]') {
+    if (type === '[object Object]') {
       let v = doUseState(state, dispatch, origV, [...path, c])
 
       return {
@@ -46,6 +55,37 @@ function doUseState<T extends IStringMap<any>, U extends IStringMap<any>>(
           },
           set(newV: any) {
             v = doUseState(state, dispatch, newV, [...path, c])
+            dispatch({
+              type: 'set',
+              path: [...path, c],
+              value: newV,
+            })
+          },
+        },
+      }
+    }
+
+    if (type === '[object Array]') {
+      let v = origV.map((item: any, idx: number) => {
+        if (isComplexObj(item)) {
+          return doUseState(state, dispatch, item, [...path, c, String(idx)])
+        }
+        return item
+      })
+
+      return {
+        ...p,
+        [c]: {
+          get() {
+            return v
+          },
+          set(newV: any) {
+            v = origV.map((item: any, idx: number) => {
+              if (isComplexObj(item)) {
+                return doUseState(state, dispatch, item, [...path, c, String(idx)])
+              }
+              return item
+            })
             dispatch({
               type: 'set',
               path: [...path, c],
