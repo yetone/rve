@@ -1,9 +1,9 @@
 {
   "name": "rve",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "React mixed Vue API",
   "main": "./dist/rve.min.js",
-  "types": "./dist/rve.d.ts",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "dev": "yarn run tslint && webpack --mode development",
     "dev:watch": "nodemon --exec 'yarn run dev || exit 1'",
