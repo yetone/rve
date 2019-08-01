@@ -28,9 +28,8 @@ function App() {
       <p>a.b.c.d is {state.a.b.c.d}</p>
       <input type="text" value={state.user.name} onChange={e => state.user.name = e.target.value} />
       <input type="text" value={state.a.b.c.d} onChange={e => state.a.b.c.d = e.target.value} />
-      <button onClick={inc}>
-        Click me
-      </button>
+      <button onClick={() => state.a.b = {c: {d: 233}}}>Reset a.b</button>
+      <button onClick={inc}>Click me</button>
     </div>
   )
 }

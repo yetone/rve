@@ -7,13 +7,13 @@ interface IStringMap<T> {
   [key: string]: T,
 }
 
-type Action = {
+interface IAction {
   type: 'set' | 'del',
-  path: Array<string>,
+  path: string[],
   value?: any,
 }
 
-function reducer(state: IStringMap<any>, action: Action) {
+function reducer(state: IStringMap<any>, action: IAction) {
   switch (action.type) {
     case 'set':
       return immutable.set(state, action.path, action.value)
@@ -30,19 +30,29 @@ function useState<T extends IStringMap<any>>(obj: T): {[key in keyof T]: any} {
   return doUseState(state, dispatch, obj, [])
 }
 
-function doUseState<T extends IStringMap<any>, U extends IStringMap<any>>(state: U, dispatch: Dispatch<Action>, obj: T, path: Array<string>): {[key in keyof T]: any} {
+function doUseState<T extends IStringMap<any>, U extends IStringMap<any>>(
+  state: U, dispatch: Dispatch<IAction>, obj: T, path: string[]): {[key in keyof T]: any} {
   const descriptors: PropertyDescriptorMap = Object.keys(obj).reduce((p, c) => {
     const origV = obj[c]
 
     if (Object.prototype.toString.call(origV) === '[object Object]') {
-      const v = doUseState(state, dispatch, origV, [...path, c])
+      let v = doUseState(state, dispatch, origV, [...path, c])
+
       return {
         ...p,
         [c]: {
           get() {
             return v
-          }
-        }
+          },
+          set(newV: any) {
+            v = doUseState(state, dispatch, newV, [...path, c])
+            dispatch({
+              type: 'set',
+              path: [...path, c],
+              value: newV,
+            })
+          },
+        },
       }
     }
 
