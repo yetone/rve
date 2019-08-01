@@ -1,5 +1,5 @@
 ## rue
-React mixed Vue
+React mixed Vue API
 
 
 ### TL;DR
