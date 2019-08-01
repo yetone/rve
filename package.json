@@ -9,10 +9,8 @@
     "dev:watch": "nodemon --exec 'yarn run dev || exit 1'",
     "tslint": "tslint --project .",
     "build": "yarn run tslint && webpack --mode production",
-    "test": "yarn run clean && jest && yarn run demo:test && yarn run clean",
-    "test:coverage": "yarn run clean && jest --coverage && yarn run demo:test && yarn run clean",
     "clean": "rm -rf dist",
-    "demo": "yarn run build && cd demo && yarn run build && open ./index.html"
+    "demo": "nodemon --exec 'cd demo && yarn && yarn run dev'"
   },
   "author": "yetone <yetoneful@gmail.com>",
   "license": "MIT",
@@ -32,8 +30,11 @@
     "webpack-cli": "^3.0.8"
   },
   "dependencies": {
+    "@types/object-path": "^0.11.0",
     "@types/react": "^16.8.23",
     "@types/react-dom": "^16.8.5",
+    "object-path": "^0.11.4",
+    "object-path-immutable": "^3.1.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   }

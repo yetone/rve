@@ -4,7 +4,8 @@
     "./README.md"
   ],
   "watch": [
-    "./src/"
+    "./src/",
+    "./demo/demo.tsx"
   ],
   "ext": "js,json,ts,tsx"
 }

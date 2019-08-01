@@ -3,18 +3,31 @@ import { useState, useEffect, render } from 'rue'
 
 function App() {
   const state = useState({
-    count: 0
+    count: 0,
+    user: {
+      name: 'yetone',
+    },
+    a: {
+      b: {
+        c: {
+          d: 0,
+        }
+      }
+    }
   })
 
   const inc = () => state.count++
 
   useEffect(() => {
-    document.title = `You clicked ${state.count} times`
+    document.title = `${state.user.name} clicked ${state.count} times`
   })
 
   return (
     <div>
-      <p>You clicked {state.count} times</p>
+      <p>{state.user.name} clicked {state.count} times</p>
+      <p>a.b.c.d is {state.a.b.c.d}</p>
+      <input type="text" value={state.user.name} onChange={e => state.user.name = e.target.value} />
+      <input type="text" value={state.a.b.c.d} onChange={e => state.a.b.c.d = e.target.value} />
       <button onClick={inc}>
         Click me
       </button>

@@ -38,6 +38,11 @@
   resolved "https://registry.npm.taobao.org/@types/node/download/@types/node-10.14.13.tgz#ac786d623860adf39a3f51d629480aacd6a6eec7"
   integrity sha1-rHhtYjhgrfOaP1HWKUgKrNam7sc=
 
+"@types/object-path@^0.11.0":
+  version "0.11.0"
+  resolved "https://registry.npm.taobao.org/@types/object-path/download/@types/object-path-0.11.0.tgz#0b744309b2573dc8bf867ef589b6288be998e602"
+  integrity sha1-C3RDCbJXPci/hn71ibYoi+mY5gI=
+
 "@types/prop-types@*":
   version "15.7.1"
   resolved "https://registry.npm.taobao.org/@types/prop-types/download/@types/prop-types-15.7.1.tgz#f1a11e7babb0c3cad68100be381d1e064c68f1f6"
@@ -2533,6 +2538,13 @@ is-path-inside@^1.0.0:
   dependencies:
     path-is-inside "^1.0.1"
 
+is-plain-object@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.npm.taobao.org/is-plain-object/download/is-plain-object-3.0.0.tgz#47bfc5da1b5d50d64110806c199359482e75a928"
+  integrity sha1-R7/F2htdUNZBEIBsGZNZSC51qSg=
+  dependencies:
+    isobject "^4.0.0"
+
 is-plain-object@^2.0.3, is-plain-object@^2.0.4:
   version "2.0.4"
   resolved "https://registry.npm.taobao.org/is-plain-object/download/is-plain-object-2.0.4.tgz#2c163b3fafb1b606d9d17928f05c2a1c38e07677"
@@ -2620,6 +2632,11 @@ isobject@^3.0.0, isobject@^3.0.1:
   version "3.0.1"
   resolved "https://registry.npm.taobao.org/isobject/download/isobject-3.0.1.tgz#4e431e92b11a9731636aa1f9c8d1ccbcfdab78df"
   integrity sha1-TkMekrEalzFjaqH5yNHMvP2reN8=
+
+isobject@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.npm.taobao.org/isobject/download/isobject-4.0.0.tgz#3f1c9155e73b192022a80819bacd0343711697b0"
+  integrity sha1-PxyRVec7GSAiqAgZus0DQ3EWl7A=
 
 isstream@~0.1.2:
   version "0.1.2"
@@ -3760,6 +3777,18 @@ object-keys@^1.0.12:
   version "1.1.1"
   resolved "https://registry.npm.taobao.org/object-keys/download/object-keys-1.1.1.tgz#1c47f272df277f3b1daf061677d9c82e2322c60e"
   integrity sha1-HEfyct8nfzsdrwYWd9nILiMixg4=
+
+object-path-immutable@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.npm.taobao.org/object-path-immutable/download/object-path-immutable-3.1.1.tgz#93668def1fd70c82d8fc3aad5caf2d7dd55b97b5"
+  integrity sha1-k2aN7x/XDILY/DqtXK8tfdVbl7U=
+  dependencies:
+    is-plain-object "3.0.0"
+
+object-path@^0.11.4:
+  version "0.11.4"
+  resolved "https://registry.npm.taobao.org/object-path/download/object-path-0.11.4.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fobject-path%2Fdownload%2Fobject-path-0.11.4.tgz#370ae752fbf37de3ea70a861c23bba8915691949"
+  integrity sha1-NwrnUvvzfePqcKhhwju6iRVpGUk=
 
 object-visit@^1.0.0:
   version "1.0.1"

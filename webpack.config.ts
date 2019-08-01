@@ -9,7 +9,7 @@ const configCallback = (env: {[key: string]: string}, argv: webpack.Configuratio
     mode,
 
     entry: {
-      'rue': './src/rue.ts',
+      'rue': './src/index.ts',
     },
 
     output: {
