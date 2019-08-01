@@ -16,14 +16,14 @@ const configCallback = (env: {[key: string]: string}, argv: webpack.Configuratio
       filename: mode === 'production' ? '[name].min.js' : '[name].js',
       path: path.resolve(__dirname, 'dist'),
       libraryTarget: 'umd',
-      library: 'rue',
+      library: 'rve-demo',
       umdNamedDefine: true,
     },
 
     resolve: {
       extensions: ['.ts', '.tsx', '.js'],
       alias: {
-        rue: path.resolve(__dirname, '../src/index.ts')
+        rve: path.resolve(__dirname, '../src/index.ts')
       }
     },
 

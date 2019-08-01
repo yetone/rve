@@ -1,7 +1,7 @@
 {
-  "name": "rue-demo",
+  "name": "rve-demo",
   "version": "1.0.0",
-  "description": "Demo as rue consumer",
+  "description": "Demo as rve consumer",
   "main": "demo.ts",
   "author": "yetone",
   "license": "MIT",

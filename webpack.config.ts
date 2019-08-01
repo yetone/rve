@@ -9,14 +9,14 @@ const configCallback = (env: {[key: string]: string}, argv: webpack.Configuratio
     mode,
 
     entry: {
-      'rue': './src/index.ts',
+      'rve': './src/index.ts',
     },
 
     output: {
       filename: mode === 'production' ? '[name].min.js' : '[name].js',
       path: path.resolve(__dirname, 'dist'),
       libraryTarget: 'umd',
-      library: 'rue',
+      library: 'rve',
       umdNamedDefine: true,
     },
 
