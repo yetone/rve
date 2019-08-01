@@ -1,8 +1,13 @@
 ## rve
 React mixed Vue API
 
+### INSTALL
 
-### TL;DR
+```sh
+npm install rve --save
+```
+
+### USAGE
 
 ```jsx
 import React from 'react'
