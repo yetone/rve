@@ -1,12 +1,27 @@
 import React from 'react'
-import { useState, useEffect, render } from 'rve'
+import { value, useState, useEffect, render } from 'rve'
+
+interface IUser {
+  name: string
+  age: number
+}
 
 function App() {
   const state = useState({
-    count: 0,
     user: {
       name: 'yetone',
-    },
+      age: 0,
+    } as IUser,
+    users: [
+      {
+        name: 'a',
+        age: 0,
+      },
+      {
+        name: 'b',
+        age: 1,
+      },
+    ] as IUser[],
     a: {
       b: {
         c: {
@@ -16,20 +31,49 @@ function App() {
     }
   })
 
-  const inc = () => state.count++
+  const count = value(0)
+
+  const incr = () => count.value++
 
   useEffect(() => {
-    document.title = `${state.user.name} clicked ${state.count} times`
+    document.title = `${state.user.name} clicked ${count.value} times`
   })
 
   return (
     <div>
-      <p>{state.user.name} clicked {state.count} times</p>
+      <p>{state.user.age}-year-old {state.user.name} clicked {count.value} times</p>
       <p>a.b.c.d is {state.a.b.c.d}</p>
-      <input type="text" value={state.user.name} onChange={e => state.user.name = e.target.value} />
-      <input type="text" value={state.a.b.c.d} onChange={e => state.a.b.c.d = e.target.value} />
-      <button onClick={() => state.a.b = {c: {d: 233}}}>Reset a.b</button>
-      <button onClick={inc}>Click me</button>
+      <p>a.b is {JSON.stringify(state.a.b)}</p>
+      <ul>
+        {
+          state.users.map((u, i) => <li key={`user-${i}`}>{u.name} is {u.age} years old</li>)
+        }
+      </ul>
+      <div style={{marginTop: 20}}>
+        <p>
+          name: <input type="text" value={state.user.name} onChange={e => state.user.name = e.target.value} />
+        </p>
+        <p>
+          age: <input type="number" value={state.user.age} onChange={e => state.user.age = parseInt(e.target.value)} />
+        </p>
+        <p>
+          <button onClick={() => state.users = [...state.users, {...state.user}]}>Add user</button>
+        </p>
+      </div>
+      <div style={{marginTop: 20}}>
+        <button onClick={incr}>Click me</button>
+      </div>
+      <div style={{marginTop: 20}}>
+        a.b.c.d: <input type="number" value={state.a.b.c.d} onChange={e => state.a.b.c.d = parseInt(e.target.value)} />
+      </div>
+      <div style={{marginTop: 20}}>
+        <button onClick={() => state.a.b = { c: { d: 233 } }}>Reset a.b</button>
+      </div>
+      <div style={{marginTop: 20}}>
+        {
+          state.users.map((u, i) => <button key={`user-btn-${i}`} onClick={() => u.age++}>Increase {u.name}'s age</button>)
+        }
+      </div>
     </div>
   )
 }
