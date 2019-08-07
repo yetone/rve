@@ -1,6 +1,6 @@
 {
   "name": "rve",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "React mixed Vue 3.0 API",
   "main": "./dist/rve.min.js",
   "types": "./dist/index.d.ts",
