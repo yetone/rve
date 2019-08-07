@@ -1,6 +1,6 @@
 {
   "name": "rve",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "React mixed Vue 3.0 API with type safety",
   "main": "./dist/rve.min.js",
   "types": "./dist/index.d.ts",
@@ -10,7 +10,8 @@
     "tslint": "tslint --project .",
     "build": "yarn run tslint && webpack --mode production",
     "clean": "rm -rf dist",
-    "demo": "nodemon --exec 'cd demo && yarn && yarn run dev'"
+    "demo": "nodemon --exec 'cd demo && yarn && yarn run dev'",
+    "pub": "yarn run build && yarn publish --registry http://registry.npmjs.org"
   },
   "author": "yetone <yetoneful@gmail.com>",
   "license": "MIT",
