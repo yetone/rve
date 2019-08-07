@@ -59,10 +59,6 @@ function value<T>(obj: T): {value: T} {
 
 function useState<T>(obj: T): T
 function useState(obj: any): any {
-  if (!isComplexObj(obj)) {
-    obj = { value: obj }
-  }
-
   const [state, dispatch] = useReducer(reducer, obj);
 
   return doUseState(state, dispatch, obj, [])
