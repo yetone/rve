@@ -8,9 +8,36 @@ interface IStringMap<T> {
 }
 
 interface IAction {
-  type: 'set' | 'del',
+  type: 'set' | 'del' | 'state',
   path: string[],
   value?: any,
+}
+
+function isComplexObj(obj: any): boolean {
+  return isComplexType(Object.prototype.toString.call(obj))
+}
+
+function isComplexType(type: string): boolean {
+  return ['[object Object]', '[object Array]'].indexOf(type) >= 0
+}
+
+function toPlainObj<T>(obj: T): T
+function toPlainObj(obj: any): any {
+  const type = Object.prototype.toString.call(obj)
+  if (!isComplexType(type)) {
+    return obj
+  }
+  if (type === '[object Object]') {
+    return Object.keys(obj).reduce((p, c) => {
+      return {
+        ...p,
+        [c]: toPlainObj(obj[c]),
+      }
+    }, {})
+  }
+  if (type === '[object Array]') {
+    return obj.map(toPlainObj)
+  }
 }
 
 function reducer(state: IStringMap<any>, action: IAction) {
@@ -19,64 +46,70 @@ function reducer(state: IStringMap<any>, action: IAction) {
       return immutable.set(state, action.path, action.value)
     case 'del':
       return immutable.del(state, action.path)
+    case 'state':
+      return action.value
     default:
       throw new Error(`reducer not support ${action.type} now!`)
   }
 }
 
-function useState<T extends IStringMap<any>>(obj: T): {[key in keyof T]: any} {
+function value<T>(obj: T): {value: T} {
+  return useState({value: obj})
+}
+
+function useState<T>(obj: T): T
+function useState(obj: any): any {
+  if (!isComplexObj(obj)) {
+    obj = { value: obj }
+  }
+
   const [state, dispatch] = useReducer(reducer, obj);
 
   return doUseState(state, dispatch, obj, [])
 }
 
-function doUseState<T extends IStringMap<any>, U extends IStringMap<any>>(
-  state: U, dispatch: Dispatch<IAction>, obj: T, path: string[]): {[key in keyof T]: any} {
+function doUseState<T>(state: T, dispatch: Dispatch<IAction>, obj: T, path: string[]): T
+function doUseState(state: any, dispatch: Dispatch<IAction>, obj: any, path: string[]): any {
+  const type = Object.prototype.toString.call(obj)
+
   const descriptors: PropertyDescriptorMap = Object.keys(obj).reduce((p, c) => {
-    const origV = obj[c]
+    const newPath = [...path, c]
 
-    if (Object.prototype.toString.call(origV) === '[object Object]') {
-      let v = doUseState(state, dispatch, origV, [...path, c])
+    let v = objectPath.get(state, newPath)
 
-      return {
-        ...p,
-        [c]: {
-          get() {
-            return v
-          },
-          set(newV: any) {
-            v = doUseState(state, dispatch, newV, [...path, c])
-            dispatch({
-              type: 'set',
-              path: [...path, c],
-              value: newV,
-            })
-          },
-        },
-      }
+    if (isComplexObj(v)) {
+      v = doUseState(state, dispatch, v, newPath)
     }
 
     return {
       ...p,
       [c]: {
+        enumerable: true,
         get() {
-          return objectPath.get(state, [...path, c])
+          return v
         },
         set(newV: any) {
+          newV = toPlainObj(newV)
+          state = immutable.set(state, newPath, newV)
+
           dispatch({
-            type: 'set',
-            path: [...path, c],
-            value: newV,
+            type: 'state',
+            path: [],
+            value: state,
           })
         },
       },
     }
   }, {})
 
-  return Object.defineProperties({}, descriptors)
+  if (type === '[object Object]') {
+    return Object.defineProperties({}, descriptors)
+  }
+  return Object.defineProperties([], descriptors)
 }
 
 export {
+  value,
   useState,
   useEffect,
   render,
