@@ -3,13 +3,14 @@ import webpack from 'webpack';
 
 const configCallback = (env: {[key: string]: string}, argv: webpack.Configuration): webpack.Configuration => {
   const mode = argv.mode || 'development';
+  // tslint:disable-next-line
   console.log('running webpack with mode:', mode);
 
   const config: webpack.Configuration = {
     mode,
 
     entry: {
-      'rve': './src/index.ts',
+      rve: './src/index.ts',
     },
 
     output: {

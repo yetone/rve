@@ -51,10 +51,10 @@ function App() {
       </ul>
       <div style={{marginTop: 20}}>
         <p>
-          name: <input type="text" value={state.user.name} onChange={e => state.user.name = e.target.value} />
+          name: <input type='text' value={state.user.name} onChange={e => state.user.name = e.target.value} />
         </p>
         <p>
-          age: <input type="number" value={state.user.age} onChange={e => state.user.age = parseInt(e.target.value)} />
+          age: <input type='number' value={state.user.age} onChange={e => state.user.age = parseInt(e.target.value, 10)} />
         </p>
         <p>
           <button onClick={() => state.users = [...state.users, {...state.user}]}>Add user</button>
@@ -64,7 +64,7 @@ function App() {
         <button onClick={incr}>Click me</button>
       </div>
       <div style={{marginTop: 20}}>
-        a.b.c.d: <input type="number" value={state.a.b.c.d} onChange={e => state.a.b.c.d = parseInt(e.target.value)} />
+        a.b.c.d: <input type='number' value={state.a.b.c.d} onChange={e => state.a.b.c.d = parseInt(e.target.value, 10)} />
       </div>
       <div style={{marginTop: 20}}>
         <button onClick={() => state.a.b = { c: { d: 233 } }}>Reset a.b</button>
