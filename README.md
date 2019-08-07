@@ -1,6 +1,10 @@
 ## rve
 React mixed Vue 3.0 API with type safe
 
+
+[![NPM](https://nodei.co/npm/rve.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/rve/)
+
+
 ### INSTALL
 
 ```sh
