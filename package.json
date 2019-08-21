@@ -13,7 +13,7 @@
     "prepare": "yarn run build",
     "clean": "rm -rf dist",
     "demo": "nodemon --exec 'cd demo && yarn && yarn run dev'",
-    "deploy": "yarn run prepare && yarn publish --registry http://registry.npmjs.org"
+    "deploy": "yarn publish --registry http://registry.npmjs.org"
   },
   "author": "yetone <yetoneful@gmail.com>",
   "license": "MIT",
