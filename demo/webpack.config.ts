@@ -24,8 +24,8 @@ const configCallback = (env: {[key: string]: string}, argv: webpack.Configuratio
     resolve: {
       extensions: ['.ts', '.tsx', '.js'],
       alias: {
-        rve: path.resolve(__dirname, '../src/index.ts')
-      }
+        rve: path.resolve(__dirname, '../src/index.ts'),
+      },
     },
 
     module: {

@@ -26,9 +26,9 @@ function App() {
       b: {
         c: {
           d: 0,
-        }
-      }
-    }
+        },
+      },
+    },
   })
 
   const count = value(0)
