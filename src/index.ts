@@ -22,9 +22,6 @@ function isComplexType(type: string): boolean {
 function toPlainObj<T>(obj: T): T
 function toPlainObj(obj: any): any {
   const type = Object.prototype.toString.call(obj)
-  if (!isComplexType(type)) {
-    return obj
-  }
   if (type === ObjectType) {
     return Object.keys(obj).reduce((p, c) => {
       return {
@@ -36,6 +33,7 @@ function toPlainObj(obj: any): any {
   if (type === ArrayType) {
     return obj.map(toPlainObj)
   }
+  return obj
 }
 
 function reducer<T>(_: T, action: IAction<T>) {
