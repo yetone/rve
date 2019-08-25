@@ -62,7 +62,8 @@
     "dist",
     "demo",
     "**/*.test.ts",
-    "**/webpack.config.ts"
+    "**/webpack.config.ts",
+    "rollup.config.js"
   ],
   "compilation": {
     "compiler": {
