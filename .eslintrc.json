@@ -1,0 +1,52 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "jsx": true,
+    "useJSXTextNode": true
+  },
+  "env": {
+    "browser": true,
+    "jasmine": true,
+    "jest": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+    "prettier/@typescript-eslint"
+  ],
+  "plugins": ["@typescript-eslint", "react", "react-hooks"],
+  "rules": {
+      "quotes": ["error", "single", {"avoidEscape": true}],
+      "require-atomic-updates": "off",
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn",
+      "@typescript-eslint/no-use-before-define": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/explicit-function-return-type": "off",
+      "@typescript-eslint/interface-name-prefix": ["warn", {"prefixWithI": "always"}],
+      "react/display-name": "off",
+      "react/prop-types": "off",
+      "camelcase": "off",
+      "@typescript-eslint/camelcase": ["error", { "properties": "never" }],
+      "prettier/prettier": ["error", { 
+        "singleQuote": true,
+        "jsxSingleQuote": true,
+        "semi": false,
+        "trailingComma": "es5",
+        "tabWidth": 4,
+        "useTabs": false ,
+        "quoteProps": "consistent",
+        "parser": "typescript",
+        "bracketSpacing": true,
+        "printWidth": 120
+        }
+      ]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
+}
