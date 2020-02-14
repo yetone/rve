@@ -19,8 +19,8 @@ function isComplexType(type: string): boolean {
     return ComplexTypes.indexOf(type) >= 0
 }
 
-function toPlainObj<T>(obj: T): T
-function toPlainObj(obj: any): any {
+export function toPlainObj<T>(obj: T): T
+export function toPlainObj(obj: any): any {
     const type = Object.prototype.toString.call(obj)
     if (type === ObjectType) {
         return Object.keys(obj).reduce((p, c) => {
@@ -48,7 +48,7 @@ function value<T>(obj: T): { value: T } {
 function useState<T>(obj: T): T {
     const [state, dispatch] = useReducer(reducer, obj)
 
-    return doUseState(state, dispatch, obj, [])
+    return doUseState<T>(state as T, dispatch, obj, [])
 }
 
 function doUseState<T>(state: T, dispatch: Dispatch<IAction<T>>, obj: T, path: string[]): T {

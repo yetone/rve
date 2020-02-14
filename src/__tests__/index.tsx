@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
-import { useState } from '../../src'
+import { useState, toPlainObj } from '../../src'
 
 const App: React.FC = () => {
     const state = useState({
@@ -150,4 +150,28 @@ test('add users', async () => {
     fireEvent.click(userBtn3)
     fireEvent.click(userBtn3)
     expect(asFragment()).toMatchSnapshot()
+})
+
+describe('test toPlainObj', () => {
+    const obj = Object.defineProperties(
+        {},
+        {
+            name: {
+                enumerable: true,
+                get() {
+                    return 'yetone'
+                },
+            },
+            age: {
+                enumerable: true,
+                get() {
+                    return 21
+                },
+            },
+        }
+    )
+
+    const _obj = toPlainObj(obj)
+
+    expect(_obj).toEqual({ name: 'yetone', age: 21 })
 })
