@@ -7,8 +7,9 @@ const ObjectType = '[object Object]'
 const ArrayType = '[object Array]'
 const ComplexTypes = [ObjectType, ArrayType]
 
-interface IAction<T> {
-    state: T
+interface IAction {
+    path: string[]
+    value: any
 }
 
 function isComplexObj(obj: any): boolean {
@@ -36,8 +37,8 @@ export function toPlainObj(obj: any): any {
     return obj
 }
 
-function reducer<T>(_: T, action: IAction<T>) {
-    return action.state
+function reducer<T>(state: T, action: IAction) {
+    return immutable.set(state, action.path, action.value)
 }
 
 function value<T>(obj: T): { value: T } {
@@ -51,7 +52,7 @@ function useState<T>(obj: T): T {
     return doUseState<T>(state as T, dispatch, obj, [])
 }
 
-function doUseState<T>(state: T, dispatch: Dispatch<IAction<T>>, obj: T, path: string[]): T {
+function doUseState<T>(state: T, dispatch: Dispatch<IAction>, obj: T, path: string[]): T {
     const type = Object.prototype.toString.call(obj)
 
     const descriptors: PropertyDescriptorMap = Object.keys(obj).reduce((p, c) => {
@@ -71,10 +72,10 @@ function doUseState<T>(state: T, dispatch: Dispatch<IAction<T>>, obj: T, path: s
                 },
                 set(newV: any) {
                     newV = toPlainObj(newV)
-                    state = immutable.set(state, newPath, newV)
 
                     dispatch({
-                        state,
+                        path: newPath,
+                        value: newV,
                     })
                 },
             },
